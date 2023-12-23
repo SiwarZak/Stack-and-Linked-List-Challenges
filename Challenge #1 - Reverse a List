@@ -1,0 +1,56 @@
+//Build the Stack class
+class Stack<T> {
+  List<T> _items = [];
+
+  // Push an item onto the stack
+  void push(T item) {
+    _items.add(item);
+  }
+
+  // Pop an item from the stack
+  T pop() {
+    if (isEmpty) {
+      throw StateError('Stack is empty!');
+    }
+    return _items.removeLast();
+  }
+
+  // Peek at the top item without removing it
+  T peek() {
+    if (isEmpty) {
+      throw StateError('Stack is empty!');
+    }
+    return _items.last;
+  }
+
+  // Check if the stack is empty
+  bool get isEmpty => _items.isEmpty;
+
+  // Get the size of the stack
+  int get size => _items.length;
+}
+
+void main() {
+  // Create a list of integers
+  List  listToReverse= [1,2,3,4,5,6,7]; 
+  
+  printListinReverse(listToReverse);
+
+}
+
+ void printListinReverse(List list){
+      // Create a stack of integers
+      Stack<int> myStack = Stack<int>();
+     //Copy the list items into the stack
+     for(int i=0;i<list.length;i++){
+       myStack.push(list[i]);
+    }
+    print('Here is your reversed list:');
+    //Print the items in reverse
+    for(int i=0;i<list.length;i++){
+       print (myStack.pop());
+    }
+    
+  }
+
+
