@@ -1,0 +1,101 @@
+void main(){
+   LinkedList<int> linkedList = LinkedList<int>();
+   
+   linkedList.push(5);
+   linkedList.push(10);
+   linkedList.push(15);
+   
+   print('Here is the linked list prnted in reverse');
+   printLinkedListinReverse(linkedList.head);
+}
+
+
+
+// Print the elements of the linked list in reverse order
+  void printLinkedListinReverse<T>(Node<T>? node) {
+  if (node == null) {
+    return;
+  }
+  printLinkedListinReverse(node.next);
+
+  print(node.data);
+}
+
+//Build the NODE Class
+class Node<T> {
+  T data;
+  Node<T>? next;
+
+  Node(this.data, [this.next]);
+}
+//Build the Linked-List Class
+class LinkedList<T> {
+  Node<T>? head;
+
+  // Add a new node to the end of the linked list
+  void push(T data) {
+    Node<T> newNode = Node(data);
+    if (head == null) {
+      head = newNode;
+    } else {
+      Node<T>? current = head;
+      while (current!.next != null) {
+        current = current.next;
+      }
+      current.next = newNode;
+    }
+  }
+
+  // Remove the first node from the linked list
+  void pop() {
+    if (head != null) {
+      head = head!.next;
+    }
+  }
+
+  // Remove the last node from the linked list
+  void removeLast() {
+    if (head == null) {
+      return;
+    }
+
+    if (head!.next == null) {
+      // If there is only one node, remove it
+      head = null;
+      return;
+    }
+
+    Node<T>? current = head;
+    Node<T>? previous;
+
+    while (current!.next != null) {
+      previous = current;
+      current = current.next;
+    }
+
+    // Set the previous node's next to null, effectively removing the last node
+    previous!.next = null;
+  }
+
+  // Print the elements of the linked list
+  void printList() {
+    Node<T>? current = head;
+    while (current != null) {
+      print(current.data);
+      current = current.next;
+    }
+  }
+
+  // Remove the node after the specified node
+  void removeAfter(Node<T> node) {
+    if (node.next != null) {
+      node.next = node.next!.next;
+    }
+  }
+
+  // Insert a new node with the given data after the specified node
+  void insertAfter(Node<T> node, T data) {
+    Node<T> newNode = Node(data, node.next);
+    node.next = newNode;
+  }
+}
